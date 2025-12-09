@@ -1,0 +1,332 @@
+16:18:31.337 [main] INFO  ProjectNameApplication - Started ProjectNameApplication in 1.451 seconds (process running for 1.566)
+Help me, Obi-Wan Kenobi. You're my only hope.
+starwars> x "what should I do in a day in tokyo?"
+16:18:32.952 [main] INFO  starwars - Created process options: {"contextId":null,"identities":{"forUser":null,"runAs":null},"blackboard":null,"verbosity":{"showPrompts":false,"showLlmResponses":false,"debug":false,"showPlanning":true,"showLongPlans":true},"allowGoalChange":true,"budget":{"cost":2.0,"actions":50,"tokens":1000000},"control":{"toolDelay":"NONE","operationDelay":"NONE","earlyTerminationPolicy":{"name":"MaxActionsEarlyTerminationPolicy"}},"prune":false,"listeners":[],"outputChannel":{}}
+16:18:32.952 [main] INFO  starwars - Executing in closed mode: Trying to find appropriate agent
+16:18:32.953 [main] INFO  starwars - Choosing Agent based on UserInput(content=what should I do in a day in tokyo?, timestamp=2025-10-08T22:18:32.952871Z)
+16:18:32.970 [main] DEBUG DummyInstanceCreator - Creating mock instance for class com.embabel.agent.spi.support.RankingsResponse
+16:18:32.970 [main] DEBUG DummyInstanceCreator - Creating mock instance for class com.embabel.agent.spi.support.RankedChoiceResponse
+16:18:32.970 [main] DEBUG DummyInstanceCreator - Creating mock instance for class java.lang.String
+16:18:32.970 [main] DEBUG DummyInstanceCreator - Creating mock instance for class double
+16:18:32.970 [main] DEBUG DummyInstanceCreator - Creating mock instance for class com.embabel.agent.spi.support.RankedChoiceResponse
+16:18:32.970 [main] DEBUG DummyInstanceCreator - Creating mock instance for class java.lang.String
+16:18:32.970 [main] DEBUG DummyInstanceCreator - Creating mock instance for class double
+16:18:32.971 [main] DEBUG DummyInstanceCreator - Creating mock instance for class com.embabel.agent.spi.support.RankedChoiceResponse
+16:18:32.971 [main] DEBUG DummyInstanceCreator - Creating mock instance for class java.lang.String
+16:18:32.971 [main] DEBUG DummyInstanceCreator - Creating mock instance for class double
+16:18:34.514 [main] DEBUG ExceptionWrappingConverter - Raw LLM output: {"rankings":[{"name":"OpenAIDemoAgent","confidence":0.95},{"name":"WriteAndReviewAgent","confidence":0.05}]}
+16:18:34.516 [main] DEBUG ChatClientLlmOperations - Usage is DefaultUsage{promptTokens=443, completionTokens=33, totalTokens=476}
+16:18:34.517 [main] DEBUG Autonomy - Agent choice OpenAIDemoAgent with confidence 0.95 for user intent what should I do in a day in tokyo?: Choices were OpenAIDemoAgent
+WriteAndReviewAgent
+16:18:34.517 [main] INFO  starwars - Chosen Agent I have with confidence 0.95 based on UserInput(content=what should I do in a day in tokyo?, timestamp=2025-10-08T22:18:32.952871Z)
+16:18:34.520 [main] INFO  starwars - You will find only what you bring in: Created agent instance:
+    description: Help the user to generate a Itinerary or find a flight
+    provider: com.embabel.template.agent
+    version: 0.1.0-SNAPSHOT
+      name: OpenAIDemoAgent
+      goals:
+        "The user has received either a travel itinerary or a flight recommendation" com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+        preconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: TRUE
+        value: 0.0
+      actions:
+        name: com.embabel.template.agent.OpenAIDemoAgent.classify
+        preconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: FALSE
+          it:com.embabel.agent.domain.io.UserInput: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Option: FALSE
+        postconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Option: TRUE
+        name: com.embabel.template.agent.OpenAIDemoAgent.flightAction
+        preconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: FALSE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Flight: FALSE
+          it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest: TRUE
+        postconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+        name: com.embabel.template.agent.OpenAIDemoAgent.itineraryAction
+        preconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: FALSE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: FALSE
+          it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest: TRUE
+        postconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+        name: com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+        preconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: FALSE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: FALSE
+        postconditions:
+          hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: TRUE
+          it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: TRUE
+      conditions:
+      schema types:
+        class: com.embabel.agent.domain.io.UserInput
+        class: com.embabel.agent.api.common.OperationContext
+        class: com.embabel.template.agent.OpenAIDemoAgent$Option
+        class: com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest
+        class: com.embabel.template.agent.OpenAIDemoAgent$Itinerary
+        class: com.embabel.template.agent.OpenAIDemoAgent$FlightRequest
+        class: com.embabel.template.agent.OpenAIDemoAgent$Flight
+        class: com.embabel.template.agent.OpenAIDemoAgent$Recomendation
+16:18:34.521 [main] DEBUG Agent - description: Help the user to generate a Itinerary or find a flight
+provider: com.embabel.template.agent
+version: 0.1.0-SNAPSHOT
+name: OpenAIDemoAgent
+goals:
+  "The user has received either a travel itinerary or a flight recommendation" com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: TRUE
+  value: 0.0
+actions:
+  name: com.embabel.template.agent.OpenAIDemoAgent.classify
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: FALSE
+    it:com.embabel.agent.domain.io.UserInput: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: FALSE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.flightAction
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest: TRUE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.itineraryAction
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest: TRUE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: FALSE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: TRUE
+conditions:
+schema types:
+  class: com.embabel.agent.domain.io.UserInput
+  class: com.embabel.agent.api.common.OperationContext
+  class: com.embabel.template.agent.OpenAIDemoAgent$Option
+  class: com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest
+  class: com.embabel.template.agent.OpenAIDemoAgent$Itinerary
+  class: com.embabel.template.agent.OpenAIDemoAgent$FlightRequest
+  class: com.embabel.template.agent.OpenAIDemoAgent$Flight
+  class: com.embabel.template.agent.OpenAIDemoAgent$Recomendation
+16:18:34.521 [main] DEBUG DefaultAgentPlatform - 🚀 Creating process distracted_sanderson
+16:18:34.521 [main] INFO  starwars - Created a process I have: distracted_sanderson
+16:18:34.523 [main] INFO  starwars - [distracted_sanderson] Difficult to see. Always in motion is the future: Ready to plan from:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: FALSE
+    it:com.embabel.agent.domain.io.UserInput: TRUE
+16:18:34.523 [main] DEBUG SimpleAgentProcess - Process distracted_sanderson tick (about to plan): GoapWorldState(state={it:com.embabel.agent.domain.io.UserInput=TRUE, it:com.embabel.template.agent.OpenAIDemoAgent$Option=FALSE, hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify=FALSE, it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest=FALSE, it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary=FALSE, hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction=FALSE, it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest=FALSE, it:com.embabel.template.agent.OpenAIDemoAgent$Flight=FALSE, hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction=FALSE, it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation=FALSE, hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo=FALSE}), blackboard=InMemoryBlackboard: id=e4b9dda1-b56c-42ee-86b7-97d30115becc
+map:
+  it=UserInput(content=what should I do in a day in tokyo?, timestamp=2025-10-08T22:18:32.952871Z)
+entries:
+  UserInput(content=what should I do in a day in tokyo?, timestamp=2025-10-08T22:18:32.952871Z)
+16:18:34.524 [main] DEBUG Agent - description: Help the user to generate a Itinerary or find a flight
+provider: com.embabel.template.agent
+version: 0.1.0-SNAPSHOT
+name: OpenAIDemoAgent
+goals:
+  "The user has received either a travel itinerary or a flight recommendation" com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: TRUE
+  value: 0.0
+actions:
+  name: com.embabel.template.agent.OpenAIDemoAgent.classify
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: FALSE
+    it:com.embabel.agent.domain.io.UserInput: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: FALSE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.flightAction
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest: TRUE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.itineraryAction
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest: TRUE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: FALSE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: TRUE
+conditions:
+schema types:
+  class: com.embabel.agent.domain.io.UserInput
+  class: com.embabel.agent.api.common.OperationContext
+  class: com.embabel.template.agent.OpenAIDemoAgent$Option
+  class: com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest
+  class: com.embabel.template.agent.OpenAIDemoAgent$Itinerary
+  class: com.embabel.template.agent.OpenAIDemoAgent$FlightRequest
+  class: com.embabel.template.agent.OpenAIDemoAgent$Flight
+  class: com.embabel.template.agent.OpenAIDemoAgent$Recomendation
+16:18:34.525 [main] DEBUG Agent - description: Help the user to generate a Itinerary or find a flight
+provider: com.embabel.template.agent
+version: 0.1.0-SNAPSHOT
+name: OpenAIDemoAgent
+goals:
+  "The user has received either a travel itinerary or a flight recommendation" com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: TRUE
+  value: 0.0
+actions:
+  name: com.embabel.template.agent.OpenAIDemoAgent.classify
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: FALSE
+    it:com.embabel.agent.domain.io.UserInput: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: FALSE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.flightAction
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest: TRUE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.itineraryAction
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest: TRUE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+  name: com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+  preconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: FALSE
+  postconditions:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: TRUE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: TRUE
+conditions:
+schema types:
+  class: com.embabel.agent.domain.io.UserInput
+  class: com.embabel.agent.api.common.OperationContext
+  class: com.embabel.template.agent.OpenAIDemoAgent$Option
+  class: com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest
+  class: com.embabel.template.agent.OpenAIDemoAgent$Itinerary
+  class: com.embabel.template.agent.OpenAIDemoAgent$FlightRequest
+  class: com.embabel.template.agent.OpenAIDemoAgent$Flight
+  class: com.embabel.template.agent.OpenAIDemoAgent$Recomendation
+16:18:34.527 [main] INFO  SimpleAgentProcess - ❌ Process distracted_sanderson stuck
+  No plan from:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: FALSE
+    it:com.embabel.agent.domain.io.UserInput: TRUE
+  in:
+    GOAP system:
+      actions:
+        com.embabel.template.agent.OpenAIDemoAgent.classify
+        com.embabel.template.agent.OpenAIDemoAgent.itineraryAction
+        com.embabel.template.agent.OpenAIDemoAgent.flightAction
+        com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+      goals:
+        com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+      knownPreconditions:
+        hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify
+        hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction
+        hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction
+        hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+        it:com.embabel.agent.domain.io.UserInput
+        it:com.embabel.template.agent.OpenAIDemoAgent$Flight
+        it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest
+        it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary
+        it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest
+        it:com.embabel.template.agent.OpenAIDemoAgent$Option
+        it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation
+      knownEffects:
+        hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify
+        hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction
+        hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction
+        hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo
+        it:com.embabel.template.agent.OpenAIDemoAgent$Flight
+        it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary
+        it:com.embabel.template.agent.OpenAIDemoAgent$Option
+        it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation
+  context:
+    InMemoryBlackboard: id=e4b9dda1-b56c-42ee-86b7-97d30115becc
+    map:
+      it=UserInput(content=what should I do in a day in tokyo?, timestamp=2025-10-08T22:18:32.952871Z)
+    entries:
+      UserInput(content=what should I do in a day in tokyo?, timestamp=2025-10-08T22:18:32.952871Z)
+16:18:34.527 [main] INFO  starwars - [distracted_sanderson] stuck at:
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.classify: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.flightAction: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.itineraryAction: FALSE
+    hasRun_com.embabel.template.agent.OpenAIDemoAgent.provideTravelInfo: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Flight: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$FlightRequest: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Itinerary: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$ItineraryRequest: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Option: FALSE
+    it:com.embabel.template.agent.OpenAIDemoAgent$Recomendation: FALSE
+    it:com.embabel.agent.domain.io.UserInput: TRUE
+16:18:34.528 [main] WARN  SimpleAgentProcess - Process distracted_sanderson is stuck: no handler. History (0):
+
+I'm sorry. I don't know how to proceed.
+
+You will find that many of the truths we cling to depend greatly on our own point of view.
+starwars> 
